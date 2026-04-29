@@ -22,7 +22,19 @@ export default function Contact() {
       lines.push(``, `Message: ${form.message.trim()}`)
     }
     const text = encodeURIComponent(lines.join('\n'))
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener,noreferrer')
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`
+
+    // Programmatic anchor click is treated as a user gesture by every modern
+    // browser, so it bypasses popup blockers that would silently kill
+    // window.open() — especially on iOS Safari and Chrome desktop.
+    const a = document.createElement('a')
+    a.href = url
+    a.target = '_blank'
+    a.rel = 'noopener noreferrer'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+
     setSent(true)
     setTimeout(() => setSent(false), 4000)
     setForm({ name: '', email: '', style: 'Kathak', message: '' })
