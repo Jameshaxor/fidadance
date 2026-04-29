@@ -48,10 +48,12 @@ export default function Footer() {
           <p>
             Designed by{' '}
             <a
-              href="#"
+              href="https://instagram.com/manu_haxor"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gold/80 hover:text-gold transition-colors font-medium tracking-wide"
             >
-              Manu Haxor
+              Manu Kumar Nayak
             </a>
             <span className="mx-2 text-ivory/20">·</span>
             Crafted with <span className="text-saffron">♥</span> in Ranchi
