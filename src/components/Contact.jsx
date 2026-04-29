@@ -6,8 +6,23 @@ export default function Contact() {
   const [sent, setSent] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', style: 'Kathak', message: '' })
 
+  // WhatsApp number in international format, no '+' or spaces (India: 91 + 9234430999)
+  const WHATSAPP_NUMBER = '919234430999'
+
   const onSubmit = (e) => {
     e.preventDefault()
+    const lines = [
+      `Hi Fida Dance Academy! I'd like to book a free trial.`,
+      ``,
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      `Preferred style: ${form.style}`,
+    ]
+    if (form.message.trim()) {
+      lines.push(``, `Message: ${form.message.trim()}`)
+    }
+    const text = encodeURIComponent(lines.join('\n'))
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener,noreferrer')
     setSent(true)
     setTimeout(() => setSent(false), 4000)
     setForm({ name: '', email: '', style: 'Kathak', message: '' })
@@ -80,7 +95,7 @@ export default function Contact() {
           </Field>
 
           <button type="submit" className="btn-primary w-full justify-center">
-            {sent ? <><CheckCircle2 size={18} /> Sent — we&rsquo;ll reply soon</> : <>Book my free trial <Send size={16} /></>}
+            {sent ? <><CheckCircle2 size={18} /> Opening WhatsApp&hellip;</> : <>Book my free trial <Send size={16} /></>}
           </button>
         </motion.form>
       </div>
