@@ -103,7 +103,7 @@ export default function Contact() {
             </select>
           </Field>
           <Field label="Message">
-            <textarea rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" placeholder="Tell us about your experience and goals..." />
+            <textarea rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="input resize-none" placeholder="Tell us about your goals..." />
           </Field>
 
           <button type="submit" className="btn-primary w-full justify-center">
