@@ -15,11 +15,24 @@ export default function Footer() {
             </div>
             <p className="mt-4 text-ivory/60 max-w-sm">Fida Dance Academy — rooted in Kathak, flowing into every form. Ranchi’s premier dance studio, where movement becomes art.</p>
             <div className="mt-6 flex gap-3">
-              {[Instagram, Youtube, Twitter].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full glass grid place-items-center hover:bg-white/10 transition">
-                  <Icon size={16} />
-                </a>
-              ))}
+              {[
+                { Icon: Instagram, href: '#', label: 'Instagram' },
+                { Icon: Youtube,   href: 'https://www.youtube.com/@fidadanceacademy2696', label: 'YouTube' },
+                { Icon: Twitter,   href: '#', label: 'Twitter' },
+              ].map(({ Icon, href, label }) => {
+                const external = href.startsWith('http')
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="w-10 h-10 rounded-full glass grid place-items-center hover:bg-white/10 hover:text-gold transition"
+                  >
+                    <Icon size={16} />
+                  </a>
+                )
+              })}
             </div>
           </div>
 
