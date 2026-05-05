@@ -46,12 +46,37 @@ export default function Hero() {
         <div className="absolute bottom-0 left-1/3 w-80 h-80 rounded-full bg-maroon/40 blur-2xl" />
       </div>
 
-      {/* Giant background Devanagari */}
+      {/* Giant background Devanagari — slow, irregular bulb-like glow */}
       <motion.div
         aria-hidden
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.06 }}
-        transition={{ duration: 2 }}
+        initial={{ opacity: 0, filter: 'drop-shadow(0 0 0px rgba(245,158,43,0))' }}
+        animate={
+          reduced
+            ? { opacity: 0.08 }
+            : {
+                opacity: [0.04, 0.18, 0.07, 0.20, 0.05, 0.14, 0.06],
+                filter: [
+                  'drop-shadow(0 0 0px rgba(245,158,43,0))',
+                  'drop-shadow(0 0 38px rgba(245,158,43,0.65))',
+                  'drop-shadow(0 0 8px rgba(245,158,43,0.18))',
+                  'drop-shadow(0 0 46px rgba(245,158,43,0.75))',
+                  'drop-shadow(0 0 4px rgba(245,158,43,0.12))',
+                  'drop-shadow(0 0 28px rgba(245,158,43,0.5))',
+                  'drop-shadow(0 0 0px rgba(245,158,43,0))',
+                ],
+              }
+        }
+        transition={
+          reduced
+            ? { duration: 2 }
+            : {
+                duration: 5.6,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                // Irregular timing — short flickers between long lulls, like an old bulb
+                times: [0, 0.18, 0.26, 0.45, 0.58, 0.78, 1],
+              }
+        }
         className="pointer-events-none absolute inset-x-0 top-24 md:top-16 flex justify-center"
       >
         <span className="devanagari text-[34vw] md:text-[24vw] leading-none text-saffron select-none">
