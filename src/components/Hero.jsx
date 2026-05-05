@@ -46,34 +46,12 @@ export default function Hero() {
         <div className="absolute bottom-0 left-1/3 w-80 h-80 rounded-full bg-maroon/40 blur-2xl" />
       </div>
 
-      {/* Giant background Devanagari — slow, irregular bulb-like glow */}
+      {/* Giant background Devanagari */}
       <motion.div
         aria-hidden
-        initial={{ opacity: 0, filter: 'drop-shadow(0 0 0px rgba(245,158,43,0))' }}
-        animate={
-          reduced
-            ? { opacity: 0.08 }
-            : {
-                opacity: [0.05, 0.13, 0.07, 0.05],
-                filter: [
-                  'drop-shadow(0 0 4px rgba(245,158,43,0.1))',
-                  'drop-shadow(0 0 28px rgba(245,158,43,0.45))',
-                  'drop-shadow(0 0 12px rgba(245,158,43,0.2))',
-                  'drop-shadow(0 0 4px rgba(245,158,43,0.1))',
-                ],
-              }
-        }
-        transition={
-          reduced
-            ? { duration: 2 }
-            : {
-                duration: 14,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                // Slow inhale → bright hold → slow exhale → rest
-                times: [0, 0.4, 0.7, 1],
-              }
-        }
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.06 }}
+        transition={{ duration: 2 }}
         className="pointer-events-none absolute inset-x-0 top-24 md:top-16 flex justify-center"
       >
         <span className="devanagari text-[34vw] md:text-[24vw] leading-none text-saffron select-none">
