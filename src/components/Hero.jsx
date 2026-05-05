@@ -54,15 +54,12 @@ export default function Hero() {
           reduced
             ? { opacity: 0.08 }
             : {
-                opacity: [0.04, 0.18, 0.07, 0.20, 0.05, 0.14, 0.06],
+                opacity: [0.05, 0.13, 0.07, 0.05],
                 filter: [
-                  'drop-shadow(0 0 0px rgba(245,158,43,0))',
-                  'drop-shadow(0 0 38px rgba(245,158,43,0.65))',
-                  'drop-shadow(0 0 8px rgba(245,158,43,0.18))',
-                  'drop-shadow(0 0 46px rgba(245,158,43,0.75))',
-                  'drop-shadow(0 0 4px rgba(245,158,43,0.12))',
-                  'drop-shadow(0 0 28px rgba(245,158,43,0.5))',
-                  'drop-shadow(0 0 0px rgba(245,158,43,0))',
+                  'drop-shadow(0 0 4px rgba(245,158,43,0.1))',
+                  'drop-shadow(0 0 28px rgba(245,158,43,0.45))',
+                  'drop-shadow(0 0 12px rgba(245,158,43,0.2))',
+                  'drop-shadow(0 0 4px rgba(245,158,43,0.1))',
                 ],
               }
         }
@@ -70,11 +67,11 @@ export default function Hero() {
           reduced
             ? { duration: 2 }
             : {
-                duration: 5.6,
+                duration: 14,
                 repeat: Infinity,
                 ease: 'easeInOut',
-                // Irregular timing — short flickers between long lulls, like an old bulb
-                times: [0, 0.18, 0.26, 0.45, 0.58, 0.78, 1],
+                // Slow inhale → bright hold → slow exhale → rest
+                times: [0, 0.4, 0.7, 1],
               }
         }
         className="pointer-events-none absolute inset-x-0 top-24 md:top-16 flex justify-center"
