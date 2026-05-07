@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e2b"/>
+      <stop offset="55%" stop-color="#d63a2a"/>
+      <stop offset="100%" stop-color="#6b1324"/>
+    </linearGradient>
+    <radialGradient id="shine" cx="35%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" ry="14" fill="url(#g)"/>
+  <rect width="64" height="64" rx="14" ry="14" fill="url(#shine)"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.5" ry="13.5" fill="none" stroke="#d8a857" stroke-opacity="0.55" stroke-width="1.2"/>
+  <text x="50%" y="50%"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="'Tiro Devanagari Hindi', 'Noto Sans Devanagari', serif"
+        font-size="42"
+        fill="#f4ead2">फ</text>
+</svg>
