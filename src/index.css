@@ -51,17 +51,6 @@ img { -webkit-user-drag: none; }
 
 section { scroll-margin-top: 90px; }
 
-/* Skip layout & paint for sections that aren't on-screen — modern browsers
-   only render what's visible. The intrinsic size hint prevents the scrollbar
-   from jumping as sections enter/exit the viewport. Hero is excluded so it
-   paints immediately on first load. */
-@supports (content-visibility: auto) {
-  main > section:not(:first-of-type) {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 800px;
-  }
-}
-
 ::selection { background: #f59e2b; color: #0a0610; }
 
 /* Custom scrollbar */
