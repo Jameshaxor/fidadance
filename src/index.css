@@ -44,9 +44,23 @@ body::before {
 
 img { -webkit-user-drag: none; }
 
-.parallax-layer { will-change: transform; transform: translateZ(0); backface-visibility: hidden; }
+/* GPU promotion only — no permanent will-change. Framer Motion adds
+   will-change dynamically while an element is animating, then removes
+   it on settle, which is the correct lifecycle. */
+.parallax-layer { transform: translateZ(0); backface-visibility: hidden; }
 
 section { scroll-margin-top: 90px; }
+
+/* Skip layout & paint for sections that aren't on-screen — modern browsers
+   only render what's visible. The intrinsic size hint prevents the scrollbar
+   from jumping as sections enter/exit the viewport. Hero is excluded so it
+   paints immediately on first load. */
+@supports (content-visibility: auto) {
+  main > section:not(:first-of-type) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+}
 
 ::selection { background: #f59e2b; color: #0a0610; }
 
@@ -60,10 +74,12 @@ section { scroll-margin-top: 90px; }
 
 @layer components {
   .glass {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/10;
+    /* backdrop-blur-lg (16px) instead of -xl (24px) — much cheaper on the
+       GPU during scroll, visually almost identical at this opacity. */
+    @apply bg-white/[0.04] backdrop-blur-lg border border-white/10;
   }
   .glass-strong {
-    @apply bg-white/[0.06] backdrop-blur-2xl border border-white/15;
+    @apply bg-white/[0.06] backdrop-blur-xl border border-white/15;
   }
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-ivory
