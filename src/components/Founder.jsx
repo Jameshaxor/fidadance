@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import SafeImg from './SafeImg'
-import { FOUNDER_PORTRAIT } from '../assets/images'
+import { FOUNDER_PORTRAIT, FOUNDER_PORTRAIT_WEBP } from '../assets/images'
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -79,6 +79,7 @@ export default function Founder() {
               >
                 <SafeImg
                   src={FOUNDER_PORTRAIT}
+                  webpSrc={FOUNDER_PORTRAIT_WEBP}
                   alt="Namita Sinha — Founder & Artistic Director of Fida Dance Academy"
                   loading="lazy"
                   className="w-full h-full object-cover"

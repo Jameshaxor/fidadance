@@ -1,7 +1,16 @@
 import { useState } from 'react'
 
 // Image with graceful gradient fallback if the source fails to load.
-export default function SafeImg({ src, alt = '', className = '', fallbackClass = 'bg-gradient-to-br from-maroon via-vermillion to-saffron', ...rest }) {
+// Pass `webpSrc` to serve a smaller WebP to supporting browsers via <picture>;
+// `src` (the JPEG/PNG) is the universal fallback.
+export default function SafeImg({
+  src,
+  webpSrc,
+  alt = '',
+  className = '',
+  fallbackClass = 'bg-gradient-to-br from-maroon via-vermillion to-saffron',
+  ...rest
+}) {
   const [ok, setOk] = useState(true)
   if (!ok) {
     return (
@@ -16,7 +25,8 @@ export default function SafeImg({ src, alt = '', className = '', fallbackClass =
       </div>
     )
   }
-  return (
+
+  const img = (
     <img
       src={src}
       alt={alt}
@@ -24,5 +34,14 @@ export default function SafeImg({ src, alt = '', className = '', fallbackClass =
       onError={() => setOk(false)}
       {...rest}
     />
+  )
+
+  if (!webpSrc) return img
+
+  return (
+    <picture>
+      <source srcSet={webpSrc} type="image/webp" />
+      {img}
+    </picture>
   )
 }
