@@ -1,4 +1,4 @@
-# Rhythm — Dance Academy
+# Fida — Dance Academy
 
 A modern, cinematic single-page site for a fictional dance academy.
 
