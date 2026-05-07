@@ -16,8 +16,13 @@ export default function ScrollRail() {
   const [active, setActive] = useState('top')
 
   useEffect(() => {
-    const observers = []
-    SECTIONS.forEach(({ id }) => {
+    // Sections below the fold are lazy-loaded (see App.jsx), so they don't
+    // exist in the DOM when this effect first runs. We attach observers
+    // idempotently as each section appears.
+    const observers = new Map()
+
+    const attach = (id) => {
+      if (observers.has(id)) return
       const el = document.getElementById(id)
       if (!el) return
       const obs = new IntersectionObserver(
@@ -29,9 +34,29 @@ export default function ScrollRail() {
         { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
       )
       obs.observe(el)
-      observers.push(obs)
-    })
-    return () => observers.forEach((o) => o.disconnect())
+      observers.set(id, obs)
+    }
+
+    const attachAll = () => SECTIONS.forEach(({ id }) => attach(id))
+
+    // First pass: pick up sections already in the DOM (Hero, Marquee).
+    attachAll()
+
+    // Watch <main> for late-mounting lazy sections and attach observers
+    // for them as they hydrate. Once all sections are attached the
+    // MutationObserver still fires on Framer Motion DOM churn, but each
+    // call is a cheap Map lookup that early-exits.
+    const main = document.querySelector('main')
+    let mo
+    if (main) {
+      mo = new MutationObserver(attachAll)
+      mo.observe(main, { childList: true, subtree: true })
+    }
+
+    return () => {
+      if (mo) mo.disconnect()
+      observers.forEach((o) => o.disconnect())
+    }
   }, [])
 
   return (
